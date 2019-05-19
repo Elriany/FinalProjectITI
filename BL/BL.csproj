@@ -48,11 +48,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Classes\CourseManager.cs" />
     <Compile Include="Classes\FeesManager.cs" />
     <Compile Include="Classes\IRepository.cs" />
+    <Compile Include="Classes\ParentManager.cs" />
     <Compile Include="Classes\Repository.cs" />
+    <Compile Include="Classes\TaskManager.cs" />
     <Compile Include="Classes\UnitOfWork.cs" />
+    <Compile Include="Models\CourseCustom.cs" />
     <Compile Include="Models\FeesCustom.cs" />
+    <Compile Include="Models\ParentCustom.cs" />
+    <Compile Include="Models\TaskCustom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

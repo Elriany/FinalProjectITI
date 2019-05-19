@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SchoolDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SchoolDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="book">
           <Key>
             <PropertyRef Name="bookID" />
@@ -137,7 +137,7 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="RuleName" Type="nvarchar" MaxLength="70" />
-          <Property Name="RuleAName" Type="nvarchar" MaxLength="70" />
+          <Property Name="status" Type="nvarchar" MaxLength="70" />
         </EntityType>
         <EntityType Name="tbl_Task">
           <Key>
@@ -337,7 +337,8 @@
             <End Role="tbl_Task" EntitySet="tbl_Task" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SchoolDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -363,7 +364,7 @@
           <Property Name="fees" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="scheduleFile" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="courses" Relationship="Self.FK__course__staffId__25869641" FromRole="ClassLevel" ToRole="course" />
-          <NavigationProperty Name="tbl_Task" Relationship="SchoolDBModel.FK_tbl_Task_ClassLevel" FromRole="ClassLevel" ToRole="tbl_Task" />
+          <NavigationProperty Name="tbl_Task" Relationship="Self.FK_tbl_Task_ClassLevel" FromRole="ClassLevel" ToRole="tbl_Task" />
         </EntityType>
         <EntityType Name="course">
           <Key>
@@ -493,8 +494,17 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="RuleName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
-          <Property Name="RuleAName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="staffs" Relationship="Self.FK__staff__RoleId__1A14E395" FromRole="tbl_role" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="tbl_Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="taskName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="levelId" Type="Int32" />
+          <NavigationProperty Name="ClassLevel" Relationship="Self.FK_tbl_Task_ClassLevel" FromRole="tbl_Task" ToRole="ClassLevel" />
         </EntityType>
         <Association Name="FK__book__adminId__20C1E124">
           <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
@@ -517,6 +527,18 @@
             </Principal>
             <Dependent Role="course">
               <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Task_ClassLevel">
+          <End Role="ClassLevel" Type="Self.ClassLevel" Multiplicity="1" />
+          <End Role="tbl_Task" Type="Self.tbl_Task" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClassLevel">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_Task">
+              <PropertyRef Name="id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -616,7 +638,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SchoolDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SchoolDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="books" EntityType="Self.book" />
           <EntitySet Name="ClassLevels" EntityType="Self.ClassLevel" />
           <EntitySet Name="courses" EntityType="Self.course" />
@@ -628,6 +650,7 @@
           <EntitySet Name="students" EntityType="Self.student" />
           <EntitySet Name="tbl_absence" EntityType="Self.tbl_absence" />
           <EntitySet Name="tbl_role" EntityType="Self.tbl_role" />
+          <EntitySet Name="tbl_Task" EntityType="Self.tbl_Task" />
           <AssociationSet Name="FK__book__adminId__20C1E124" Association="Self.FK__book__adminId__20C1E124">
             <End Role="staff" EntitySet="staffs" />
             <End Role="book" EntitySet="books" />
@@ -635,6 +658,10 @@
           <AssociationSet Name="FK__course__staffId__25869641" Association="Self.FK__course__staffId__25869641">
             <End Role="ClassLevel" EntitySet="ClassLevels" />
             <End Role="course" EntitySet="courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Task_ClassLevel" Association="Self.FK_tbl_Task_ClassLevel">
+            <End Role="ClassLevel" EntitySet="ClassLevels" />
+            <End Role="tbl_Task" EntitySet="tbl_Task" />
           </AssociationSet>
           <AssociationSet Name="FK__course__levelID__267ABA7A" Association="Self.FK__course__levelID__267ABA7A">
             <End Role="staff" EntitySet="staffs" />
@@ -668,39 +695,13 @@
             <End Role="student" EntitySet="students" />
             <End Role="tbl_absence" EntitySet="tbl_absence" />
           </AssociationSet>
-          <EntitySet Name="tbl_Task" EntityType="SchoolDBModel.tbl_Task" />
-          <AssociationSet Name="FK_tbl_Task_ClassLevel" Association="SchoolDBModel.FK_tbl_Task_ClassLevel">
-            <End Role="ClassLevel" EntitySet="ClassLevels" />
-            <End Role="tbl_Task" EntitySet="tbl_Task" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="tbl_Task">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="taskName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="levelId" Type="Int32" />
-          <NavigationProperty Name="ClassLevel" Relationship="SchoolDBModel.FK_tbl_Task_ClassLevel" FromRole="tbl_Task" ToRole="ClassLevel" />
-        </EntityType>
-        <Association Name="FK_tbl_Task_ClassLevel">
-          <End Type="SchoolDBModel.ClassLevel" Role="ClassLevel" Multiplicity="1" />
-          <End Type="SchoolDBModel.tbl_Task" Role="tbl_Task" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ClassLevel">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tbl_Task">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SchoolDBModelStoreContainer" CdmEntityContainer="SchoolDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="SchoolDBModelStoreContainer" CdmEntityContainer="SchoolDBEntities">
           <EntitySetMapping Name="books">
             <EntityTypeMapping TypeName="SchoolDBModel.book">
               <MappingFragment StoreEntitySet="book">
@@ -841,16 +842,16 @@
               <MappingFragment StoreEntitySet="tbl_role">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="RuleName" ColumnName="RuleName" />
-                <ScalarProperty Name="RuleAName" ColumnName="RuleAName" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_Task">
             <EntityTypeMapping TypeName="SchoolDBModel.tbl_Task">
               <MappingFragment StoreEntitySet="tbl_Task">
-                <ScalarProperty Name="levelId" ColumnName="levelId" />
-                <ScalarProperty Name="taskName" ColumnName="taskName" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="taskName" ColumnName="taskName" />
+                <ScalarProperty Name="levelId" ColumnName="levelId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

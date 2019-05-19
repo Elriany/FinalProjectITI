@@ -22,7 +22,7 @@ namespace DAL
     
         public int id { get; set; }
         public string RuleName { get; set; }
-        public string RuleAName { get; set; }
+        public string status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<staff> staffs { get; set; }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using DAL;
 namespace BL.Classes
 {
-    public class FeesManager : Repository<fee>
+    public class ParentManager : Repository<parent>
     {
-        public FeesManager(SchoolDBEntities ctx) : base(ctx)
+        public ParentManager(SchoolDBEntities ctx) : base(ctx)
         {
         }
     }
+
 }

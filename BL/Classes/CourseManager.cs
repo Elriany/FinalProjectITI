@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using DAL;
 namespace BL.Classes
 {
-    public class FeesManager : Repository<fee>
+    public class CourseManager : Repository<course>
     {
-        public FeesManager(SchoolDBEntities ctx) : base(ctx)
+        public CourseManager(SchoolDBEntities ctx) : base(ctx)
         {
         }
     }

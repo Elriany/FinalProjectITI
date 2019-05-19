@@ -13,17 +13,17 @@ namespace FinalProject.Controllers
 {
     public class FeesController : ApiController
     {
-        UnitOfWork uow = new UnitOfWork();
+        UnitOfWork unitOfWork = new UnitOfWork();
         // GET: api/Fees
         public IEnumerable<FeesCustom> Get()
         {
-            return uow.FeesManager.GetAllBind().Select(f=> new FeesCustom { id=f.id,total=f.total??0,paid=f.paid??0,reminder=f.reminder??0 });
+            return unitOfWork.FeesManager.GetAllBind().Select(f=> new FeesCustom { id=f.id,total=f.total??0,paid=f.paid??0,reminder=f.reminder??0 });
         }
 
         // GET: api/Fees/5
         public FeesCustom Get(int id)
         {
-            var entity =  uow.FeesManager.GetByID(id); //ToDo
+            var entity =  unitOfWork.FeesManager.GetByID(id); //ToDo
             FeesCustom fee = new FeesCustom();
             fee.id = entity.id;
             fee.total = entity.total??0;
@@ -35,20 +35,20 @@ namespace FinalProject.Controllers
         // post: api/fees
         public bool post(fee f)
         {
-            return uow.FeesManager.AddEntity(f);            
+            return unitOfWork.FeesManager.AddEntity(f);            
         }
 
         // PUT: api/Fees/5
         public bool Put(fee f)
         {
-            return uow.FeesManager.UpdateEntity(f);
+            return unitOfWork.FeesManager.UpdateEntity(f);
         }
 
         // DELETE: api/Fees/5
         public bool Delete(int id)
         {
-            var entity = uow.FeesManager.GetByID(id);
-            return uow.FeesManager.DeleteEntity(entity);
+            var entity = unitOfWork.FeesManager.GetByID(id);
+            return unitOfWork.FeesManager.DeleteEntity(entity);
         }
     }
 }

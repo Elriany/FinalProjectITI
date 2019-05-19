@@ -9,20 +9,41 @@ namespace BL.Classes
 {
     public class UnitOfWork
     {
-        SchoolDBEntities1 ctx = new SchoolDBEntities1();
+        SchoolDBEntities ctx = new SchoolDBEntities();
         public FeesManager FeesManager
         {
             get
             {
                 return new FeesManager(ctx);
-                //if(FeesManager == null)
-                //{
-                //    return new FeesManager(ctx);
-                //}
-                //else
-                //{
-                //    return FeesManager;
-                //}
+                /*if (FeesManager == null)
+                {
+                    return new FeesManager(ctx);
+                }
+                else
+                {
+                    return FeesManager;
+                }*/
+            }
+        }
+        public CourseManager CourseManager
+        {
+            get
+            {
+                return new CourseManager(ctx);
+            }
+        }
+        public TaskManager TaskManager
+        {
+            get
+            {
+                return new TaskManager(ctx);
+            }
+        }
+        public ParentManager ParentManager
+        {
+            get
+            {
+                return new ParentManager(ctx);
             }
         }
     }

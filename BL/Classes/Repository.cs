@@ -10,9 +10,9 @@ namespace BL.Classes
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity:class
     {
-        private SchoolDBEntities1 _ctx;
+        private SchoolDBEntities _ctx;
         private DbSet<TEntity> _set;
-        public Repository(SchoolDBEntities1 ctx)
+        public Repository(SchoolDBEntities ctx)
         {
             _ctx = ctx;
             _set = _ctx.Set<TEntity>();
