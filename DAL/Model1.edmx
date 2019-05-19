@@ -1,0 +1,880 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SchoolDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="book">
+          <Key>
+            <PropertyRef Name="bookID" />
+          </Key>
+          <Property Name="bookID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="70" />
+          <Property Name="ATitle" Type="nvarchar" MaxLength="70" />
+          <Property Name="status" Type="bit" />
+          <Property Name="link" Type="nvarchar" MaxLength="70" />
+          <Property Name="adminId" Type="int" />
+        </EntityType>
+        <EntityType Name="ClassLevel">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="levelName" Type="nvarchar" MaxLength="70" />
+          <Property Name="levelAName" Type="nvarchar" MaxLength="70" />
+          <Property Name="fees" Type="money" />
+          <Property Name="scheduleFile" Type="nvarchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="crs_Name" Type="nvarchar" MaxLength="70" />
+          <Property Name="crs_AName" Type="nvarchar" MaxLength="70" />
+          <Property Name="levelID" Type="int" />
+          <Property Name="staffId" Type="int" />
+        </EntityType>
+        <EntityType Name="fees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="total" Type="money" />
+          <Property Name="paid" Type="money" />
+          <Property Name="reminder" Type="money" />
+        </EntityType>
+        <EntityType Name="news">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="ATitle" Type="nvarchar(max)" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="AContent" Type="nvarchar(max)" />
+          <Property Name="NewsDate" Type="datetime" />
+          <Property Name="status" Type="bit" />
+          <Property Name="adminId" Type="int" />
+        </EntityType>
+        <EntityType Name="parent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="fname" Type="nvarchar" MaxLength="70" />
+          <Property Name="lname" Type="nvarchar" MaxLength="70" />
+          <Property Name="Afname" Type="nvarchar" MaxLength="70" />
+          <Property Name="Alname" Type="nvarchar" MaxLength="70" />
+          <Property Name="email" Type="nvarchar" MaxLength="70" />
+          <Property Name="pass" Type="nvarchar" MaxLength="70" />
+          <Property Name="phone" Type="nvarchar" MaxLength="70" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Img" Type="nvarchar" MaxLength="70" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="fname" Type="nvarchar" MaxLength="70" />
+          <Property Name="lname" Type="nvarchar" MaxLength="70" />
+          <Property Name="Afname" Type="nvarchar" MaxLength="70" />
+          <Property Name="Alname" Type="nvarchar" MaxLength="70" />
+          <Property Name="email" Type="nvarchar" MaxLength="70" />
+          <Property Name="pass" Type="nvarchar" MaxLength="70" />
+          <Property Name="phone" Type="nvarchar" MaxLength="70" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="JoinDate" Type="datetime" />
+          <Property Name="FiredDate" Type="datetime" />
+          <Property Name="Img" Type="nvarchar" MaxLength="70" />
+          <Property Name="status" Type="bit" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <EntityType Name="std_Crs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="stdId" Type="int" />
+          <Property Name="CrsId" Type="int" />
+          <Property Name="grade" Type="numeric" Precision="4" Scale="2" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="fname" Type="nvarchar" MaxLength="70" />
+          <Property Name="lname" Type="nvarchar" MaxLength="70" />
+          <Property Name="Afname" Type="nvarchar" MaxLength="70" />
+          <Property Name="Alname" Type="nvarchar" MaxLength="70" />
+          <Property Name="email" Type="nvarchar" MaxLength="70" />
+          <Property Name="pass" Type="nvarchar" MaxLength="70" />
+          <Property Name="phone" Type="nvarchar" MaxLength="70" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="JoinDate" Type="datetime" />
+          <Property Name="FiredDate" Type="datetime" />
+          <Property Name="Img" Type="nvarchar" MaxLength="70" />
+          <Property Name="status" Type="bit" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="FeesID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_absence">
+          <Key>
+            <PropertyRef Name="AbsDate" />
+            <PropertyRef Name="stdId" />
+          </Key>
+          <Property Name="AbsDate" Type="date" Nullable="false" />
+          <Property Name="stdId" Type="int" Nullable="false" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="RuleName" Type="nvarchar" MaxLength="70" />
+          <Property Name="RuleAName" Type="nvarchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="tbl_Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="taskName" Type="nvarchar" MaxLength="50" />
+          <Property Name="levelId" Type="int" />
+        </EntityType>
+        <Association Name="FK__book__adminId__20C1E124">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="book" Type="Self.book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="book">
+              <PropertyRef Name="adminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__course__levelID__267ABA7A">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="course" Type="Self.course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="course">
+              <PropertyRef Name="levelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__course__staffId__25869641">
+          <End Role="ClassLevel" Type="Self.ClassLevel" Multiplicity="0..1" />
+          <End Role="course" Type="Self.course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassLevel">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="course">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__news__adminId__1ED998B2">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="news" Type="Self.news" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="news">
+              <PropertyRef Name="adminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__staff__RoleId__1A14E395">
+          <End Role="tbl_role" Type="Self.tbl_role" Multiplicity="0..1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__std_Crs__CrsId__2A4B4B5E">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="std_Crs" Type="Self.std_Crs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="std_Crs">
+              <PropertyRef Name="CrsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__std_Crs__stdId__29572725">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="std_Crs" Type="Self.std_Crs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="std_Crs">
+              <PropertyRef Name="stdId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__student__FeesID__173876EA">
+          <End Role="fees" Type="Self.fees" Multiplicity="0..1" />
+          <End Role="student" Type="Self.student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="student">
+              <PropertyRef Name="FeesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__student__ParentI__164452B1">
+          <End Role="parent" Type="Self.parent" Multiplicity="0..1" />
+          <End Role="student" Type="Self.student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="student">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_absence_student">
+          <End Role="student" Type="Self.student" Multiplicity="1" />
+          <End Role="tbl_absence" Type="Self.tbl_absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_absence">
+              <PropertyRef Name="stdId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Task_ClassLevel">
+          <End Role="ClassLevel" Type="Self.ClassLevel" Multiplicity="1" />
+          <End Role="tbl_Task" Type="Self.tbl_Task" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClassLevel">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_Task">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolDBModelStoreContainer">
+          <EntitySet Name="book" EntityType="Self.book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassLevel" EntityType="Self.ClassLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fees" EntityType="Self.fees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="parent" EntityType="Self.parent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="std_Crs" EntityType="Self.std_Crs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_absence" EntityType="Self.tbl_absence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Task" EntityType="Self.tbl_Task" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__book__adminId__20C1E124" Association="Self.FK__book__adminId__20C1E124">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="book" EntitySet="book" />
+          </AssociationSet>
+          <AssociationSet Name="FK__course__levelID__267ABA7A" Association="Self.FK__course__levelID__267ABA7A">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="course" EntitySet="course" />
+          </AssociationSet>
+          <AssociationSet Name="FK__course__staffId__25869641" Association="Self.FK__course__staffId__25869641">
+            <End Role="ClassLevel" EntitySet="ClassLevel" />
+            <End Role="course" EntitySet="course" />
+          </AssociationSet>
+          <AssociationSet Name="FK__news__adminId__1ED998B2" Association="Self.FK__news__adminId__1ED998B2">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="news" EntitySet="news" />
+          </AssociationSet>
+          <AssociationSet Name="FK__staff__RoleId__1A14E395" Association="Self.FK__staff__RoleId__1A14E395">
+            <End Role="tbl_role" EntitySet="tbl_role" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__std_Crs__CrsId__2A4B4B5E" Association="Self.FK__std_Crs__CrsId__2A4B4B5E">
+            <End Role="course" EntitySet="course" />
+            <End Role="std_Crs" EntitySet="std_Crs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__std_Crs__stdId__29572725" Association="Self.FK__std_Crs__stdId__29572725">
+            <End Role="student" EntitySet="student" />
+            <End Role="std_Crs" EntitySet="std_Crs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__student__FeesID__173876EA" Association="Self.FK__student__FeesID__173876EA">
+            <End Role="fees" EntitySet="fees" />
+            <End Role="student" EntitySet="student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__student__ParentI__164452B1" Association="Self.FK__student__ParentI__164452B1">
+            <End Role="parent" EntitySet="parent" />
+            <End Role="student" EntitySet="student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_absence_student" Association="Self.FK_tbl_absence_student">
+            <End Role="student" EntitySet="student" />
+            <End Role="tbl_absence" EntitySet="tbl_absence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Task_ClassLevel" Association="Self.FK_tbl_Task_ClassLevel">
+            <End Role="ClassLevel" EntitySet="ClassLevel" />
+            <End Role="tbl_Task" EntitySet="tbl_Task" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="book">
+          <Key>
+            <PropertyRef Name="bookID" />
+          </Key>
+          <Property Name="bookID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="ATitle" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="link" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="adminId" Type="Int32" />
+          <NavigationProperty Name="staff" Relationship="Self.FK__book__adminId__20C1E124" FromRole="book" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="ClassLevel">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="levelName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="levelAName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="fees" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="scheduleFile" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="courses" Relationship="Self.FK__course__staffId__25869641" FromRole="ClassLevel" ToRole="course" />
+          <NavigationProperty Name="tbl_Task" Relationship="SchoolDBModel.FK_tbl_Task_ClassLevel" FromRole="ClassLevel" ToRole="tbl_Task" />
+        </EntityType>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="crs_Name" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="crs_AName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="levelID" Type="Int32" />
+          <Property Name="staffId" Type="Int32" />
+          <NavigationProperty Name="ClassLevel" Relationship="Self.FK__course__staffId__25869641" FromRole="course" ToRole="ClassLevel" />
+          <NavigationProperty Name="staff" Relationship="Self.FK__course__levelID__267ABA7A" FromRole="course" ToRole="staff" />
+          <NavigationProperty Name="std_Crs" Relationship="Self.FK__std_Crs__CrsId__2A4B4B5E" FromRole="course" ToRole="std_Crs" />
+        </EntityType>
+        <EntityType Name="fee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="paid" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="reminder" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="students" Relationship="Self.FK__student__FeesID__173876EA" FromRole="fees" ToRole="student" />
+        </EntityType>
+        <EntityType Name="news">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ATitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NewsDate" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="adminId" Type="Int32" />
+          <NavigationProperty Name="staff" Relationship="Self.FK__news__adminId__1ED998B2" FromRole="news" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="parent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="fname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="lname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Afname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Alname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="pass" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Img" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="students" Relationship="Self.FK__student__ParentI__164452B1" FromRole="parent" ToRole="student" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="fname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="lname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Afname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Alname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="pass" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="JoinDate" Type="DateTime" Precision="3" />
+          <Property Name="FiredDate" Type="DateTime" Precision="3" />
+          <Property Name="Img" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="books" Relationship="Self.FK__book__adminId__20C1E124" FromRole="staff" ToRole="book" />
+          <NavigationProperty Name="courses" Relationship="Self.FK__course__levelID__267ABA7A" FromRole="staff" ToRole="course" />
+          <NavigationProperty Name="news" Relationship="Self.FK__news__adminId__1ED998B2" FromRole="staff" ToRole="news" />
+          <NavigationProperty Name="tbl_role" Relationship="Self.FK__staff__RoleId__1A14E395" FromRole="staff" ToRole="tbl_role" />
+        </EntityType>
+        <EntityType Name="std_Crs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="stdId" Type="Int32" />
+          <Property Name="CrsId" Type="Int32" />
+          <Property Name="grade" Type="Decimal" Precision="4" Scale="2" />
+          <NavigationProperty Name="course" Relationship="Self.FK__std_Crs__CrsId__2A4B4B5E" FromRole="std_Crs" ToRole="course" />
+          <NavigationProperty Name="student" Relationship="Self.FK__std_Crs__stdId__29572725" FromRole="std_Crs" ToRole="student" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="fname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="lname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Afname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Alname" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="pass" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="JoinDate" Type="DateTime" Precision="3" />
+          <Property Name="FiredDate" Type="DateTime" Precision="3" />
+          <Property Name="Img" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="FeesID" Type="Int32" />
+          <NavigationProperty Name="fee" Relationship="Self.FK__student__FeesID__173876EA" FromRole="student" ToRole="fees" />
+          <NavigationProperty Name="parent" Relationship="Self.FK__student__ParentI__164452B1" FromRole="student" ToRole="parent" />
+          <NavigationProperty Name="std_Crs" Relationship="Self.FK__std_Crs__stdId__29572725" FromRole="student" ToRole="std_Crs" />
+          <NavigationProperty Name="tbl_absence" Relationship="Self.FK_tbl_absence_student" FromRole="student" ToRole="tbl_absence" />
+        </EntityType>
+        <EntityType Name="tbl_absence">
+          <Key>
+            <PropertyRef Name="AbsDate" />
+            <PropertyRef Name="stdId" />
+          </Key>
+          <Property Name="AbsDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="stdId" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="student" Relationship="Self.FK_tbl_absence_student" FromRole="tbl_absence" ToRole="student" />
+        </EntityType>
+        <EntityType Name="tbl_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="RuleName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="RuleAName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="staffs" Relationship="Self.FK__staff__RoleId__1A14E395" FromRole="tbl_role" ToRole="staff" />
+        </EntityType>
+        <Association Name="FK__book__adminId__20C1E124">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="book" Type="Self.book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="book">
+              <PropertyRef Name="adminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__course__staffId__25869641">
+          <End Role="ClassLevel" Type="Self.ClassLevel" Multiplicity="0..1" />
+          <End Role="course" Type="Self.course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassLevel">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="course">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__course__levelID__267ABA7A">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="course" Type="Self.course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="course">
+              <PropertyRef Name="levelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__std_Crs__CrsId__2A4B4B5E">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="std_Crs" Type="Self.std_Crs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="std_Crs">
+              <PropertyRef Name="CrsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__student__FeesID__173876EA">
+          <End Role="fees" Type="Self.fee" Multiplicity="0..1" />
+          <End Role="student" Type="Self.student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="student">
+              <PropertyRef Name="FeesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__news__adminId__1ED998B2">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="news" Type="Self.news" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="news">
+              <PropertyRef Name="adminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__student__ParentI__164452B1">
+          <End Role="parent" Type="Self.parent" Multiplicity="0..1" />
+          <End Role="student" Type="Self.student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="student">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__staff__RoleId__1A14E395">
+          <End Role="tbl_role" Type="Self.tbl_role" Multiplicity="0..1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__std_Crs__stdId__29572725">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="std_Crs" Type="Self.std_Crs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="std_Crs">
+              <PropertyRef Name="stdId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_absence_student">
+          <End Role="student" Type="Self.student" Multiplicity="1" />
+          <End Role="tbl_absence" Type="Self.tbl_absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_absence">
+              <PropertyRef Name="stdId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="books" EntityType="Self.book" />
+          <EntitySet Name="ClassLevels" EntityType="Self.ClassLevel" />
+          <EntitySet Name="courses" EntityType="Self.course" />
+          <EntitySet Name="fees" EntityType="Self.fee" />
+          <EntitySet Name="news" EntityType="Self.news" />
+          <EntitySet Name="parents" EntityType="Self.parent" />
+          <EntitySet Name="staffs" EntityType="Self.staff" />
+          <EntitySet Name="std_Crs" EntityType="Self.std_Crs" />
+          <EntitySet Name="students" EntityType="Self.student" />
+          <EntitySet Name="tbl_absence" EntityType="Self.tbl_absence" />
+          <EntitySet Name="tbl_role" EntityType="Self.tbl_role" />
+          <AssociationSet Name="FK__book__adminId__20C1E124" Association="Self.FK__book__adminId__20C1E124">
+            <End Role="staff" EntitySet="staffs" />
+            <End Role="book" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__course__staffId__25869641" Association="Self.FK__course__staffId__25869641">
+            <End Role="ClassLevel" EntitySet="ClassLevels" />
+            <End Role="course" EntitySet="courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__course__levelID__267ABA7A" Association="Self.FK__course__levelID__267ABA7A">
+            <End Role="staff" EntitySet="staffs" />
+            <End Role="course" EntitySet="courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__std_Crs__CrsId__2A4B4B5E" Association="Self.FK__std_Crs__CrsId__2A4B4B5E">
+            <End Role="course" EntitySet="courses" />
+            <End Role="std_Crs" EntitySet="std_Crs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__student__FeesID__173876EA" Association="Self.FK__student__FeesID__173876EA">
+            <End Role="fees" EntitySet="fees" />
+            <End Role="student" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__news__adminId__1ED998B2" Association="Self.FK__news__adminId__1ED998B2">
+            <End Role="staff" EntitySet="staffs" />
+            <End Role="news" EntitySet="news" />
+          </AssociationSet>
+          <AssociationSet Name="FK__student__ParentI__164452B1" Association="Self.FK__student__ParentI__164452B1">
+            <End Role="parent" EntitySet="parents" />
+            <End Role="student" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__staff__RoleId__1A14E395" Association="Self.FK__staff__RoleId__1A14E395">
+            <End Role="tbl_role" EntitySet="tbl_role" />
+            <End Role="staff" EntitySet="staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__std_Crs__stdId__29572725" Association="Self.FK__std_Crs__stdId__29572725">
+            <End Role="student" EntitySet="students" />
+            <End Role="std_Crs" EntitySet="std_Crs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_absence_student" Association="Self.FK_tbl_absence_student">
+            <End Role="student" EntitySet="students" />
+            <End Role="tbl_absence" EntitySet="tbl_absence" />
+          </AssociationSet>
+          <EntitySet Name="tbl_Task" EntityType="SchoolDBModel.tbl_Task" />
+          <AssociationSet Name="FK_tbl_Task_ClassLevel" Association="SchoolDBModel.FK_tbl_Task_ClassLevel">
+            <End Role="ClassLevel" EntitySet="ClassLevels" />
+            <End Role="tbl_Task" EntitySet="tbl_Task" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="taskName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="levelId" Type="Int32" />
+          <NavigationProperty Name="ClassLevel" Relationship="SchoolDBModel.FK_tbl_Task_ClassLevel" FromRole="tbl_Task" ToRole="ClassLevel" />
+        </EntityType>
+        <Association Name="FK_tbl_Task_ClassLevel">
+          <End Type="SchoolDBModel.ClassLevel" Role="ClassLevel" Multiplicity="1" />
+          <End Type="SchoolDBModel.tbl_Task" Role="tbl_Task" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClassLevel">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_Task">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchoolDBModelStoreContainer" CdmEntityContainer="SchoolDBEntities1">
+          <EntitySetMapping Name="books">
+            <EntityTypeMapping TypeName="SchoolDBModel.book">
+              <MappingFragment StoreEntitySet="book">
+                <ScalarProperty Name="bookID" ColumnName="bookID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ATitle" ColumnName="ATitle" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="adminId" ColumnName="adminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassLevels">
+            <EntityTypeMapping TypeName="SchoolDBModel.ClassLevel">
+              <MappingFragment StoreEntitySet="ClassLevel">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="levelName" ColumnName="levelName" />
+                <ScalarProperty Name="levelAName" ColumnName="levelAName" />
+                <ScalarProperty Name="fees" ColumnName="fees" />
+                <ScalarProperty Name="scheduleFile" ColumnName="scheduleFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courses">
+            <EntityTypeMapping TypeName="SchoolDBModel.course">
+              <MappingFragment StoreEntitySet="course">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="crs_Name" ColumnName="crs_Name" />
+                <ScalarProperty Name="crs_AName" ColumnName="crs_AName" />
+                <ScalarProperty Name="levelID" ColumnName="levelID" />
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fees">
+            <EntityTypeMapping TypeName="SchoolDBModel.fee">
+              <MappingFragment StoreEntitySet="fees">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="paid" ColumnName="paid" />
+                <ScalarProperty Name="reminder" ColumnName="reminder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="news">
+            <EntityTypeMapping TypeName="SchoolDBModel.news">
+              <MappingFragment StoreEntitySet="news">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ATitle" ColumnName="ATitle" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="AContent" ColumnName="AContent" />
+                <ScalarProperty Name="NewsDate" ColumnName="NewsDate" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="adminId" ColumnName="adminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parents">
+            <EntityTypeMapping TypeName="SchoolDBModel.parent">
+              <MappingFragment StoreEntitySet="parent">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="Afname" ColumnName="Afname" />
+                <ScalarProperty Name="Alname" ColumnName="Alname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staffs">
+            <EntityTypeMapping TypeName="SchoolDBModel.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="Afname" ColumnName="Afname" />
+                <ScalarProperty Name="Alname" ColumnName="Alname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="FiredDate" ColumnName="FiredDate" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="std_Crs">
+            <EntityTypeMapping TypeName="SchoolDBModel.std_Crs">
+              <MappingFragment StoreEntitySet="std_Crs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="stdId" ColumnName="stdId" />
+                <ScalarProperty Name="CrsId" ColumnName="CrsId" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="SchoolDBModel.student">
+              <MappingFragment StoreEntitySet="student">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="Afname" ColumnName="Afname" />
+                <ScalarProperty Name="Alname" ColumnName="Alname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="FiredDate" ColumnName="FiredDate" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="FeesID" ColumnName="FeesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_absence">
+            <EntityTypeMapping TypeName="SchoolDBModel.tbl_absence">
+              <MappingFragment StoreEntitySet="tbl_absence">
+                <ScalarProperty Name="AbsDate" ColumnName="AbsDate" />
+                <ScalarProperty Name="stdId" ColumnName="stdId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_role">
+            <EntityTypeMapping TypeName="SchoolDBModel.tbl_role">
+              <MappingFragment StoreEntitySet="tbl_role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="RuleName" ColumnName="RuleName" />
+                <ScalarProperty Name="RuleAName" ColumnName="RuleAName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Task">
+            <EntityTypeMapping TypeName="SchoolDBModel.tbl_Task">
+              <MappingFragment StoreEntitySet="tbl_Task">
+                <ScalarProperty Name="levelId" ColumnName="levelId" />
+                <ScalarProperty Name="taskName" ColumnName="taskName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
