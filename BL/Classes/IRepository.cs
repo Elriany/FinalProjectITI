@@ -14,5 +14,6 @@ namespace BL.Classes
         bool AddEntity(TEntity entity);
         bool UpdateEntity(TEntity entity);
         bool DeleteEntity(TEntity entity);
+        int MaxId(TEntity entity);
     }
 }

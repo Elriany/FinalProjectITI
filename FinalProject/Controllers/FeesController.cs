@@ -35,7 +35,16 @@ namespace FinalProject.Controllers
         // post: api/fees
         public bool post(fee f)
         {
-            return unitOfWork.FeesManager.AddEntity(f);            
+            var id = unitOfWork.FeesManager.MaxId(f);
+            for (int i = 0; true; i++)
+            {
+                if (unitOfWork.FeesManager.GetByID(id) == null)
+                {
+                    f.id = id;
+                    return unitOfWork.FeesManager.AddEntity(f);
+                }
+                id++;
+            }
         }
 
         // PUT: api/Fees/5

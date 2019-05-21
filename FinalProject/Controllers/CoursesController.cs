@@ -32,7 +32,16 @@ namespace FinalProject.Controllers
         // POST: api/Courses
         public bool Post(course crs)
         {
-            return unitOfWork.CourseManager.AddEntity(crs);
+            var id = unitOfWork.CourseManager.MaxId(crs);
+            for (int i = 0; true; i++)
+            {
+                if (unitOfWork.CourseManager.GetByID(id) == null)
+                {
+                    crs.code = id;
+                    return unitOfWork.CourseManager.AddEntity(crs);
+                }
+                id++;
+            }
         }
 
         // PUT: api/Courses/5

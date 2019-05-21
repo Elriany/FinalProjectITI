@@ -14,9 +14,10 @@ namespace DAL
     
     public partial class tbl_absence
     {
-        public System.DateTime AbsDate { get; set; }
         public int stdId { get; set; }
         public Nullable<bool> status { get; set; }
+        public Nullable<System.DateTime> absenceDate { get; set; }
+        public int id { get; set; }
     
         public virtual student student { get; set; }
     }

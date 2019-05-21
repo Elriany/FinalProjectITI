@@ -18,6 +18,7 @@ namespace DAL
         public ClassLevel()
         {
             this.courses = new HashSet<course>();
+            this.tbl_Task = new HashSet<tbl_Task>();
         }
     
         public int id { get; set; }
@@ -28,6 +29,7 @@ namespace DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<course> courses { get; set; }
-        public virtual tbl_Task tbl_Task { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_Task> tbl_Task { get; set; }
     }
 }

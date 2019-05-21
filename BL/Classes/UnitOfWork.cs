@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
-
 namespace BL.Classes
 {
     public class UnitOfWork
@@ -45,6 +44,44 @@ namespace BL.Classes
             {
                 return new ParentManager(ctx);
             }
+        }
+        public BookManager BookManager
+        {
+            get
+            {
+                return new BookManager(ctx);
+            }
+        }
+        public NewsManager NewsManager
+        {
+            get
+            {
+                return new NewsManager(ctx);
+            }
+        }
+        public RolesManager RolesManager
+        {
+            get { return new RolesManager(ctx); }
+        }
+        public AbsenceManager AbsenceManager
+        {
+            get { return new AbsenceManager(ctx); }
+        }
+        public StudentManager StudentManager
+        {
+            get
+            {
+                return new StudentManager(ctx);
+
+            }
+        }
+        public StuffManger StuffManger
+        {
+            get { return new StuffManger(ctx); }
+        }
+        public LevelManager LevelManager
+        {
+            get { return new LevelManager(ctx); }
         }
     }
 }

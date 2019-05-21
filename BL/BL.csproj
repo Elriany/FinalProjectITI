@@ -48,16 +48,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Classes\AbsenceManager.cs" />
+    <Compile Include="Classes\BookManager.cs" />
     <Compile Include="Classes\CourseManager.cs" />
     <Compile Include="Classes\FeesManager.cs" />
     <Compile Include="Classes\IRepository.cs" />
+    <Compile Include="Classes\LevelManager.cs" />
+    <Compile Include="Classes\NewsManager.cs" />
     <Compile Include="Classes\ParentManager.cs" />
     <Compile Include="Classes\Repository.cs" />
+    <Compile Include="Classes\RolesManager.cs" />
+    <Compile Include="Classes\StudentManager.cs" />
+    <Compile Include="Classes\StuffManger.cs" />
     <Compile Include="Classes\TaskManager.cs" />
     <Compile Include="Classes\UnitOfWork.cs" />
+    <Compile Include="Models\AbsenceCustom.cs" />
+    <Compile Include="Models\BookCustom.cs" />
     <Compile Include="Models\CourseCustom.cs" />
     <Compile Include="Models\FeesCustom.cs" />
+    <Compile Include="Models\LevelCustom.cs" />
+    <Compile Include="Models\NewsCustom.cs" />
     <Compile Include="Models\ParentCustom.cs" />
+    <Compile Include="Models\RoleCustom.cs" />
+    <Compile Include="Models\StudentCustom.cs" />
+    <Compile Include="Models\StuffCustom.cs" />
     <Compile Include="Models\TaskCustom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

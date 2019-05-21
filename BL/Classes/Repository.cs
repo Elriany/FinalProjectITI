@@ -46,5 +46,10 @@ namespace BL.Classes
             _ctx.Entry(entity).State = EntityState.Modified;
             return _ctx.SaveChanges() > 0;
         }
+
+        public int MaxId(TEntity entity)
+        {
+            return _ctx.Set<TEntity>().Count()+1;
+        }
     }
 }

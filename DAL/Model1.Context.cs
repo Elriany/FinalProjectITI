@@ -37,5 +37,6 @@ namespace DAL
         public virtual DbSet<tbl_absence> tbl_absence { get; set; }
         public virtual DbSet<tbl_role> tbl_role { get; set; }
         public virtual DbSet<tbl_Task> tbl_Task { get; set; }
+        
     }
 }

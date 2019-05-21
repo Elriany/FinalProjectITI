@@ -31,7 +31,16 @@ namespace FinalProject.Controllers
         // POST: api/Tasks
         public bool Post(tbl_Task task)
         {
-            return unitOfWork.TaskManager.AddEntity(task);
+            var id = unitOfWork.TaskManager.MaxId(task);
+            for (int i = 0; true; i++)
+            {
+                if (unitOfWork.TaskManager.GetByID(id) == null)
+                {
+                    task.id = id;
+                    return unitOfWork.TaskManager.AddEntity(task);
+                }
+                id++;
+            }
         }
 
         // PUT: api/Tasks/5

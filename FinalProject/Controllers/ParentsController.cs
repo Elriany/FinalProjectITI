@@ -42,7 +42,16 @@ namespace FinalProject.Controllers
         // POST: api/Parents
         public bool Post(parent parent)
         {
-            return unitOfWork.ParentManager.AddEntity(parent);
+            var id = unitOfWork.ParentManager.MaxId(parent);
+            for (int i = 0; true; i++)
+            {
+                if (unitOfWork.ParentManager.GetByID(id) == null)
+                {
+                    parent.id = id;
+                    return unitOfWork.ParentManager.AddEntity(parent);
+                }
+                id++;
+            }
         }
 
         // PUT: api/Parents/5

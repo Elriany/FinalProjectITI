@@ -124,12 +124,12 @@
         </EntityType>
         <EntityType Name="tbl_absence">
           <Key>
-            <PropertyRef Name="AbsDate" />
-            <PropertyRef Name="stdId" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="AbsDate" Type="date" Nullable="false" />
           <Property Name="stdId" Type="int" Nullable="false" />
           <Property Name="status" Type="bit" />
+          <Property Name="absenceDate" Type="date" />
+          <Property Name="id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_role">
           <Key>
@@ -268,14 +268,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_Task_ClassLevel">
-          <End Role="ClassLevel" Type="Self.ClassLevel" Multiplicity="1" />
-          <End Role="tbl_Task" Type="Self.tbl_Task" Multiplicity="0..1" />
+          <End Role="ClassLevel" Type="Self.ClassLevel" Multiplicity="0..1" />
+          <End Role="tbl_Task" Type="Self.tbl_Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClassLevel">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="tbl_Task">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="levelId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -480,12 +480,12 @@
         </EntityType>
         <EntityType Name="tbl_absence">
           <Key>
-            <PropertyRef Name="AbsDate" />
-            <PropertyRef Name="stdId" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="AbsDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="stdId" Type="Int32" Nullable="false" />
           <Property Name="status" Type="Boolean" />
+          <Property Name="absenceDate" Type="DateTime" Precision="0" />
+          <Property Name="id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="student" Relationship="Self.FK_tbl_absence_student" FromRole="tbl_absence" ToRole="student" />
         </EntityType>
         <EntityType Name="tbl_role">
@@ -531,14 +531,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_Task_ClassLevel">
-          <End Role="ClassLevel" Type="Self.ClassLevel" Multiplicity="1" />
-          <End Role="tbl_Task" Type="Self.tbl_Task" Multiplicity="0..1" />
+          <End Role="ClassLevel" Type="Self.ClassLevel" Multiplicity="0..1" />
+          <End Role="tbl_Task" Type="Self.tbl_Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClassLevel">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="tbl_Task">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="levelId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -831,9 +831,10 @@
           <EntitySetMapping Name="tbl_absence">
             <EntityTypeMapping TypeName="SchoolDBModel.tbl_absence">
               <MappingFragment StoreEntitySet="tbl_absence">
-                <ScalarProperty Name="AbsDate" ColumnName="AbsDate" />
                 <ScalarProperty Name="stdId" ColumnName="stdId" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="absenceDate" ColumnName="absenceDate" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

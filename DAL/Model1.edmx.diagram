@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="237b1af0367b4f2dace7169634f1ea23" Name="Diagram1">
-        <EntityTypeShape EntityType="SchoolDBModel.book" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolDBModel.ClassLevel" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolDBModel.course" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolDBModel.fee" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolDBModel.news" Width="1.5" PointX="3" PointY="23.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolDBModel.parent" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolDBModel.staff" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+      <Diagram DiagramId="b7cb1bb702d44ba3a7b4d9477ce44009" Name="Diagram1">
+        <EntityTypeShape EntityType="SchoolDBModel.book" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.ClassLevel" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.course" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.fee" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.news" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.parent" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.staff" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolDBModel.std_Crs" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolDBModel.student" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolDBModel.tbl_absence" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolDBModel.tbl_role" Width="1.5" PointX="1.5" PointY="20.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolDBModel.tbl_Task" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.tbl_role" Width="1.5" PointX="1.5" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.tbl_Task" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
         <AssociationConnector Association="SchoolDBModel.FK__book__adminId__20C1E124" ManuallyRouted="false" />
         <AssociationConnector Association="SchoolDBModel.FK__course__staffId__25869641" ManuallyRouted="false" />
         <AssociationConnector Association="SchoolDBModel.FK_tbl_Task_ClassLevel" ManuallyRouted="false" />
